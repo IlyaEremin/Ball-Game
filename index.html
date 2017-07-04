@@ -12,6 +12,8 @@
 		<script>
 			var circleX = 100;
 			var circleY = 75;
+			var mouseX = 0;
+			var mouseY = 0;
 			var radius = 40;
 			var canvas = document.getElementById("myCanvas");
 			var ctx = canvas.getContext("2d");
@@ -53,34 +55,8 @@
 			};
 
 			function onMouseMove(x, y) {
-				var dist = Distance(x, circleX, y, circleY);
-				if(dist < 600) {
-					var difX = circleX - x;
-					var difY = circleY - y;
-					if(difX > 0) {						
-						if(circleX + radius + 1 < 1650) {
-							circleX = circleX + 1;
-						}
-					}
-					else if(difX < 0) {
-						if(circleX - radius - 1 > 0) {
-							circleX = circleX - 1;
-						}	
-				    }
-
-					if(difY > 0) {
-						if(circleY + radius + 1 < 900) {
-							circleY++;
-						}	
-					}
-					else if(difY < 0) {
-						if(circleY - radius - 1 > 0) {
-						circleY--;
-						}
-					}
-					moveCircle(circleX, circleY);
-				}
-				console.log(Distance(x, circleX, y, circleY));
+				mouseX = x;
+				mouseY = y;
 			};
 
 
@@ -89,7 +65,31 @@
 			};
 
 			setInterval(onTimerTick, 33); 
-			function onTimerTick() {		
+			function onTimerTick() {
+				var dist = Distance(mouseX, circleX, mouseY, circleY);
+				if(dist < 600) {
+					var difX = circleX - mouseX;
+					var difY = circleY - mouseY;
+					if(difX > 0) {						
+						if(circleX + radius + 1 < 1650) {
+							circleX++;
+						}
+					} else if(difX < 0) {
+						if(circleX - radius - 1 > 0) {
+							circleX--;
+						}	
+				    }
+					if(difY > 0) {
+						if(circleY + radius + 1 < 900) {
+							circleY++;
+						}	
+					} else if(difY < 0) {
+						if(circleY - radius - 1 > 0) {
+							circleY--;
+						}
+					}
+					moveCircle(circleX, circleY);
+				}
 			}
 
 		</script>
