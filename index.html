@@ -70,22 +70,26 @@
 				if(dist < 600) {
 					var difX = circleX - mouseX;
 					var difY = circleY - mouseY;
-					if(difX > 0) {						
-						if(circleX + radius + 50/difX < 1650) {
-							circleX = circleX + 50/difX;
+					if(difX > 0) {			
+						var speed = 50 / Math.max(2, difX);		
+						if(circleX + radius + speed < 1650) {
+							circleX = circleX + speed;
 						}
 					} else if(difX < 0) {
-						if(circleX - radius + 50/difX > 0) {
-							circleX += 50/difX;
+						var speed = 50 / Math.min(-2, difX);
+						if(circleX - radius + speed > 0) {
+							circleX += speed;
 						}	
 				    }
 					if(difY > 0) {
-						if(circleY + radius + 50/difY < 900) {
-							circleY += 50/difY;
+						var speed = 50 / Math.max(2, difY);
+						if(circleY + radius + speed < 900) {
+							circleY += speed;
 						}	
 					} else if(difY < 0) {
-						if(circleY - radius + 50/difY > 0) {
-							circleY += 50/difY;
+						var speed = 50/Math.min(-2, difY);
+						if(circleY - radius + speed > 0) {
+							circleY += speed;
 						}
 					}
 					moveCircle(circleX, circleY);
