@@ -10,8 +10,9 @@
 		</canvas>
 
 		<script>
-			var circleX = 100
+			var circleX = 100;
 			var circleY = 75;
+			var radius = 40;
 			var canvas = document.getElementById("myCanvas");
 			var ctx = canvas.getContext("2d");
 			moveCircle(circleX, circleY);
@@ -45,15 +46,48 @@
 			function moveCircle(x, y) {
 				ctx.clearRect(0, 0, canvas.width, canvas.height);
 				ctx.beginPath();
-				ctx.fillStyle = "#FFF000";
-				ctx.arc(x, y, 50, 0, 2 * Math.PI);
+				ctx.fillStyle = "#FFaa00";
+				ctx.arc(x, y, radius, 0, 2 * Math.PI);
 				ctx.fill();
 				ctx.stroke();
 			};
 
 			function onMouseMove(x, y) {
-				moveCircle(x, y)
+				var dist = Distance(x, circleX, y, circleY);
+				if(dist < 600) {
+					var difX = circleX - x;
+					var difY = circleY - y;
+					if(difX > 0) {						
+						if(circleX + radius + 1 < 1650) {
+							circleX = circleX + 1;
+						}
+					}
+					else if(difX < 0) {
+						if(circleX - radius - 1 > 0) {
+							circleX = circleX - 1;
+						}	
+				    }
+
+					if(difY > 0) {
+						if(circleY + radius + 1 < 900) {
+							circleY++;
+						}	
+					}
+					else if(difY < 0) {
+						if(circleY - radius - 1 > 0) {
+						circleY--;
+						}
+					}
+					moveCircle(circleX, circleY);
+				}
+				console.log(Distance(x, circleX, y, circleY));
 			};
+
+
+			function Distance (x1, x2, y1, y2) {
+				return Math.sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));
+			};
+
 
 		</script>
 
