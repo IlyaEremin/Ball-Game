@@ -64,28 +64,28 @@
 				return Math.sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));
 			};
 
-			setInterval(onTimerTick, 33); 
+			setInterval(onTimerTick, 16); 
 			function onTimerTick() {
 				var dist = Distance(mouseX, circleX, mouseY, circleY);
 				if(dist < 600) {
 					var difX = circleX - mouseX;
 					var difY = circleY - mouseY;
 					if(difX > 0) {						
-						if(circleX + radius + 1 < 1650) {
-							circleX++;
+						if(circleX + radius + 50/difX < 1650) {
+							circleX = circleX + 50/difX;
 						}
 					} else if(difX < 0) {
-						if(circleX - radius - 1 > 0) {
-							circleX--;
+						if(circleX - radius + 50/difX > 0) {
+							circleX += 50/difX;
 						}	
 				    }
 					if(difY > 0) {
-						if(circleY + radius + 1 < 900) {
-							circleY++;
+						if(circleY + radius + 50/difY < 900) {
+							circleY += 50/difY;
 						}	
 					} else if(difY < 0) {
-						if(circleY - radius - 1 > 0) {
-							circleY--;
+						if(circleY - radius + 50/difY > 0) {
+							circleY += 50/difY;
 						}
 					}
 					moveCircle(circleX, circleY);
