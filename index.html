@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html style="width:auto">
+	<head>
+		<meta charset="utf-8">
+		<title>Hello There!</title>
+	</head>
+	<body style="width:auto">
+		<canvas id="myCanvas" width=1650 height=900
+			style="border:1px solid #c3c3c3">
+		</canvas>
+
+		<script>
+			var circleX = 100
+			var circleY = 75;
+			var canvas = document.getElementById("myCanvas");
+			var ctx = canvas.getContext("2d");
+			moveCircle(circleX, circleY);
+
+			(function() {
+			    document.onmousemove = handleMouseMove;
+			    function handleMouseMove(event) {
+			        var dot, eventDoc, doc, body, pageX, pageY;
+
+			        event = event || window.event; // IE-ism
+
+			        // If pageX/Y aren't available and clientX/Y are,
+			        // calculate pageX/Y - logic taken from jQuery.
+			        // (This is to support old IE)
+			        if (event.pageX == null && event.clientX != null) {
+			            eventDoc = (event.target && event.target.ownerDocument) || document;
+			            doc = eventDoc.documentElement;
+			            body = eventDoc.body;
+
+			            event.pageX = event.clientX +
+			              (doc && doc.scrollLeft || body && body.scrollLeft || 0) -
+			              (doc && doc.clientLeft || body && body.clientLeft || 0);
+			            event.pageY = event.clientY +
+			              (doc && doc.scrollTop  || body && body.scrollTop  || 0) -
+			              (doc && doc.clientTop  || body && body.clientTop  || 0 );
+			        }
+			        onMouseMove(event.pageX, event.pageY)
+			    }
+			})();
+
+			function moveCircle(x, y) {
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+				ctx.beginPath();
+				ctx.fillStyle = "#FFF000";
+				ctx.arc(x, y, 50, 0, 2 * Math.PI);
+				ctx.fill();
+				ctx.stroke();
+			};
+
+			function onMouseMove(x, y) {
+				moveCircle(x, y)
+			};
+
+		</script>
+
+	</body>
+</html>
